@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Blog.Models.Post>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="main col-md-12">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">Home Blog</h1>
+                <div class="separator-2"></div>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                <!-- page-title end -->
+
+                <div id="posts">
+
+                    @foreach (var item in Model)
+                    {
+
+                <!-- blogpost start -->
+                        <article class="blogpost">
+                            <header>
+                                <h2><a href="#"><span id="postTitle">@item.Title</span></a></h2>
+                                <div class="post-info">
+                                    <span class="post-date">
+                                        <i class="icon-calendar"></i>
+                                        <span id="postDate">@item.Date.ToLongDateString()</span>
+                                    </span>
+                                    <span class="submitted"><i class="icon-user-1"></i> by <a href="#"><span id="postAuthor">@item.Author </span></a></span>
+                                    <span class="comments"><i class="icon-chat"></i> <a href="#">0 comments</a></span>
+                                </div>
+                            </header>
+                            <div class="blogpost-content">
+                                <span id="postContent">@item.Content</span>
+                            </div>
+                        </article>
+                        <hr />
+                <!-- blogpost end -->
+                    }
+
+                </div>
+
+                <div class="row">
+                    @using (Html.BeginForm("AddPost", "Home"))
+            {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <h4>Add Post</h4>
+
+                            <div class="form-group">
+                                <label for="Title" class="control-label col-md-2">Title</label>
+                                <div class="col-md-10">
+                                    <input type="text" id="Title" name="Title" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Title" class="control-label col-md-2">Content</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" id="Content" name="Content" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- main-container end -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
